@@ -42,18 +42,19 @@ other readable place. Please find below a Lo-Fi prototype for Brewery Explorer a
 ### Requirements
 
 Application should be created using below requirements:
-● Project should be created using Vue CLI tool (Vue.js 2.x)
-● Code and markup should be as much readable and reusable as possible
-● Code coverage with unit tests
-● At least header should be sticky while scrolling the results
-● Number of results should be limited to 100
-● Filtering by name should be integrated on API side, not client side. Filtering by state should be
-implemented on client side.
+
+- Project should be created using Vue CLI tool (Vue.js 2.x)
+- Code and markup should be as much readable and reusable as possible
+- Code coverage with unit tests
+- At least header should be sticky while scrolling the results
+- Number of results should be limited to 100
+- Filtering by name should be integrated on API side, not client side. Filtering by state should be
+  implemented on client side.
 
 ### Bonus
 
-● Create application NOT using UI libraries like Vuetify or Element
-● UI friendly for mobile devices (RWD)
-● Validate filtering by name input to allow only alphabet characters
-● Create e2e tests
-● Design your own look and feel for the application
+- Create application NOT using UI libraries like Vuetify or Element
+- UI friendly for mobile devices (RWD)
+- Validate filtering by name input to allow only alphabet characters
+- Create e2e tests
+- Design your own look and feel for the application

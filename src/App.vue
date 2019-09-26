@@ -57,4 +57,12 @@ export default {
   padding: 10px;
   text-decoration: uppercase;
 }
+
+.field-error {
+  margin: 0;
+  position: relative;
+  top: -19px;
+  font-size: 0.75rem;
+  color: #ff4500;
+}
 </style>

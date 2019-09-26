@@ -2,7 +2,7 @@
   <div class="container">
     <SearchBar
       v-model="name"
-      @input="filterListByName(name)"
+      @input="filterListByNameInAplhabets(name)"
       placeholder="Filter by name"
     />
     <SearchBar
@@ -13,6 +13,10 @@
       class="btn"
       @reset="resetList"
     >Reset</ResetButton>
+    <p
+      v-if='!isValid'
+      class="field-error"
+    >Use only alphabets</p>
     <h4>{{filteredList.length}} reuslts</h4>
     <BreweryCard
       v-for="brewery in filteredList"
@@ -38,14 +42,21 @@ export default {
       breweryList: [],
       url: "https://api.openbrewerydb.org/breweries",
       name: "",
-      state: ""
+      state: "",
+      isValid: true
     };
   },
   methods: {
     getBreweryList: function() {
       return window.fetch(this.url).then(res => res.json());
     },
-    filterListByName: function(name) {
+    filterListByNameInAplhabets: function(name) {
+      if (/\d/.test(name)) {
+        this.isValid = false;
+      } else {
+        this.isValid = true;
+      }
+
       return window
         .fetch(`${this.url}?by_name=${name}`)
         .then(res => res.json())
@@ -54,6 +65,7 @@ export default {
     resetList: function() {
       this.name = "";
       this.state = "";
+      this.isValid = true;
 
       this.getBreweryList().then(data => (this.breweryList = data));
     }

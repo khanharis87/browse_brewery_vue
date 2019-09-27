@@ -48,12 +48,18 @@ export default {
       name: "",
       state: "",
       isValid: true,
-      errorText: "Use only alphabets"
+      errorText: ""
     };
   },
   methods: {
     getBreweryList: function() {
-      return window.fetch(this.url).then(res => res.json());
+      return window
+        .fetch(this.url)
+        .then(res => res.json())
+        .catch(error => {
+          this.isValid = false;
+          this.errorText = error;
+        });
     },
     filterListByNameInAplhabets: function(name) {
       this.validateSerch(name);
@@ -61,7 +67,11 @@ export default {
       return window
         .fetch(`${this.url}?by_name=${name}`)
         .then(res => res.json())
-        .then(data => (this.breweryList = data));
+        .then(data => (this.breweryList = data))
+        .catch(error => {
+          this.isValid = false;
+          this.errorText = error;
+        });
     },
     resetList: function() {
       this.name = "";
@@ -73,8 +83,10 @@ export default {
     validateSerch: function(value) {
       if (/\d/.test(value)) {
         this.isValid = false;
+        this.errorText = "Use alphabets";
       } else {
         this.isValid = true;
+        this.errorText = "";
       }
     }
   },

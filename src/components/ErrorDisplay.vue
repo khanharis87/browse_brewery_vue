@@ -1,5 +1,5 @@
 <template>
-  <p class="field-error">Use only alphabets</p>
+  <p class="field-error">{{text}}</p>
 </template>
 
 <script>

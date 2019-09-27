@@ -6,7 +6,7 @@
 export default {
   props: {
     text: {
-      type: String,
+      type: String || Error,
       required: true
     }
   }

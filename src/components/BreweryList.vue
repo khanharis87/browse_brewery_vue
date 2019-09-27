@@ -58,7 +58,7 @@ export default {
         .then(res => res.json())
         .catch(error => {
           this.isValid = false;
-          this.errorText = error;
+          this.errorText = error.stringify();
         });
     },
     filterListByNameInAplhabets: function(name) {
@@ -70,7 +70,7 @@ export default {
         .then(data => (this.breweryList = data))
         .catch(error => {
           this.isValid = false;
-          this.errorText = error;
+          this.errorText = error.stringify();
         });
     },
     resetList: function() {

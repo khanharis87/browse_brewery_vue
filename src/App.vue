@@ -2,7 +2,7 @@
   <div id="app">
     <div class="wrapper">
       <div class="header">
-        <h1>Brewery Browser</h1>
+        <h1 class="heading">Brewery Browser</h1>
       </div>
       <BreweryList />
     </div>
@@ -36,9 +36,14 @@ export default {
 
 .header {
   background-color: thistle;
+  left: 0;
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+.heading {
+  text-align: center;
 }
 
 .container {

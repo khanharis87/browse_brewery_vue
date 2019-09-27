@@ -13,11 +13,11 @@
       class="btn"
       @reset="resetList"
     >Reset</ResetButton>
-    <p
-      v-if='!isValid'
-      class="field-error"
-    >Use only alphabets</p>
-    <h4>{{filteredList.length}} reuslts</h4>
+    <ErrorDisplay
+      v-if="!isValid"
+      :text="errorText"
+    />
+    <ListLengthDisplay :length="filteredList.length" />
     <BreweryCard
       v-for="brewery in filteredList"
       :key="brewery.id"
@@ -30,12 +30,16 @@
 import BreweryCard from "./BreweryCard";
 import SearchBar from "./SearchBar.vue";
 import ResetButton from "./ResetButton";
+import ErrorDisplay from "./ErrorDisplay";
+import ListLengthDisplay from "./ListLengthDisplay";
 
 export default {
   components: {
     SearchBar,
     ResetButton,
-    BreweryCard
+    BreweryCard,
+    ErrorDisplay,
+    ListLengthDisplay
   },
   data() {
     return {
@@ -43,7 +47,8 @@ export default {
       url: "https://api.openbrewerydb.org/breweries",
       name: "",
       state: "",
-      isValid: true
+      isValid: true,
+      errorText: "Use only alphabets"
     };
   },
   methods: {
@@ -51,11 +56,7 @@ export default {
       return window.fetch(this.url).then(res => res.json());
     },
     filterListByNameInAplhabets: function(name) {
-      if (/\d/.test(name)) {
-        this.isValid = false;
-      } else {
-        this.isValid = true;
-      }
+      this.validateSerch(name);
 
       return window
         .fetch(`${this.url}?by_name=${name}`)
@@ -68,10 +69,19 @@ export default {
       this.isValid = true;
 
       this.getBreweryList().then(data => (this.breweryList = data));
+    },
+    validateSerch: function(value) {
+      if (/\d/.test(value)) {
+        this.isValid = false;
+      } else {
+        this.isValid = true;
+      }
     }
   },
   computed: {
     filterListByState: function() {
+      this.validateSerch(this.state);
+
       return this.breweryList.filter(
         item => item.state.toLowerCase().indexOf(this.state) !== -1
       );

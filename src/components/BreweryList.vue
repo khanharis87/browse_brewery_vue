@@ -53,8 +53,7 @@ export default {
   },
   methods: {
     getBreweryList: function() {
-      return window
-        .fetch(this.url)
+      return fetch(this.url)
         .then(res => res.json())
         .catch(error => {
           this.isValid = false;
@@ -64,8 +63,7 @@ export default {
     filterListByNameInAplhabets: function(name) {
       this.validateSerch(name);
 
-      return window
-        .fetch(`${this.url}?by_name=${name}`)
+      return fetch(`${this.url}?by_name=${name}`)
         .then(res => res.json())
         .then(data => (this.breweryList = data))
         .catch(error => {
